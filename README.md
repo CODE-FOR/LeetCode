@@ -58,3 +58,26 @@ $$
 - 当不盗窃最后一家时，第一家盗不盗窃无所谓
 
 因此$dp[last][0]$的计算方式不变，$dp[last][1]$则抛弃第一家，从第二家开始考虑既不用考虑首位相接的问题，可以按照之前的计算方式计算。
+
+
+## 221.最大正方形
+
+[link](https://leetcode.cn/problems/maximal-square/submissions/)
+
+### 1.动态规划
+
+关键在于如何**切分正方形**。
+
+![image-split-square](./assets/4c781645c96f76446dd9a29b7dc5044.jpg)
+
+可以看出
+$$
+  dp[i][j]=1+min
+  \left\{
+  \begin{array}{lr}
+  dp[i-1][j-1]\\
+  dp[i][j-1]\\
+  dp[i-1][j]
+  \end{array}
+  \right.
+$$
