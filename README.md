@@ -161,3 +161,122 @@ second-->first
 
 结合`链表`与优先队列的特点，`链表`的一大特点就是根据当前节点不借助任何其他信息就可以得到其后继节点！！！
 因此可以通过`优先队列`有效节省寻找当前开头最小的队列的问题，而且不会丢失后继。
+
+
+## PART3 Hash相关
+
+### 217.存在重复元素
+
+[链接](https://leetcode.cn/problems/contains-duplicate/)
+
+无难点，使用hash表即可
+
+
+### 219.存在重复元素II
+
+[链接](https://leetcode.cn/problems/contains-duplicate-ii/)
+
+无难点，使用hash表维护各个元素最后一次出现的位置即可
+
+### 220.存在重复元素III
+
+[链接](https://leetcode.cn/problems/contains-duplicate-iii)
+
+#### 1.滑动窗口+有序集合
+
+滑动窗口是最简单直观的暴力解法，用有序集合去维护。有序集合也可以针对上界或下界，再遍历符合要求的元素，去判断另一个界限。
+
+#### 2.桶解法
+
+**重点在于如何用==hash map==实现==桶==**
+> 需要什么：
+> - 从数字映射到桶
+>   依据本题的要求，对于元素$x$，其影响的区间为$[x−t,x+t][x - t, x + t][x−t,x+t]$。可以设定桶的大小为$t+1$。如果两个元素同属一个桶，那么这两个元素必然符合条件。如果两个元素属于相邻桶，需要校验这两个元素是否差值不超过$t$。如果两个元素既不属于同一个桶，也不属于相邻桶，那么这两个元素必然不符合条件。
+> 那么从数字映射到桶的方法就出现了，$bucketID=[\frac{num}{t+1}]$
+> - 维护桶集合，因为要求下标的差小于$k$
+
+```c++
+class Solution {
+public:
+    int getID(int x, long w) {
+        return x < 0 ? (x + 1ll) / w - 1 : x / w;
+    }
+
+    bool containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t) {
+        unordered_map<int, int> mp;
+        int n = nums.size();
+        for (int i = 0; i < n; i++) {
+            long x = nums[i];
+            int id = getID(x, t + 1ll);
+            if (mp.count(id)) {
+                return true;
+            }
+            if (mp.count(id - 1) && abs(x - mp[id - 1]) <= t) {
+                return true;
+            }
+            if (mp.count(id + 1) && abs(x - mp[id + 1]) <= t) {
+                return true;
+            }
+            mp[id] = x;
+            if (i >= k) {
+                mp.erase(getID(nums[i - k], t + 1ll));
+            }
+        }
+        return false;
+    }
+};
+```
+
+
+### 290.单词规律
+
+[链接](https://leetcode.cn/problems/word-pattern/)
+
+无难度，hash表即可
+
+
+### 594.最长和谐子序列
+
+[链接](https://leetcode.cn/problems/longest-harmonious-subsequence)
+
+#### 1.滑动窗口
+
+排序后使用滑动窗口即可。
+
+### 138.复制带随机指针的链表
+
+[链接](https://leetcode.cn/problems/copy-list-with-random-pointer)
+
+无难度，使用hash表记录复制的映射即可。
+
+### 560.和为K的子数组
+
+[链接](https://leetcode.cn/problems/subarray-sum-equals-k)
+
+#### 1.前缀和+hash表
+
+$prefix[i]-prefix[j -1 ]=k, j<=i$
+只需要对每个$prefix[i]$找有多少个符合要求的$j$即可，可以使用`hash`表记录。
+
+### 525.连续数组
+
+[链接](https://leetcode.cn/problems/contiguous-array)
+
+### 1.前缀和+hash表
+
+可以参考[560.和为K的子数组](#560和为k的子数组)，仅需要做出一些调整。
+
+> - 和是什么，本题要求区间中0和1的数量相等，那么就是说1对0的==净胜==为0，可以把1看作本方进球，0看作对方进球，**和**就是把这段区间的**净胜球**。把**0看作-1**可以有效地方便计算
+
+### 128.最长连续序列
+
+[链接](https://leetcode.cn/problems/longest-consecutive-sequence)
+
+### 1.排序
+
+一般的解法
+
+### 2.hash表
+
+由于本题限制时间复杂度为$O(N)$，所以直接用hash表记录数字，不断溯源。
+**技巧**：溯源的时候从叶节点开始，可以是最小的(没有$self-1$)，最大的(没有$self+1$)，这样可以保证每个元素最多被追溯一次，不会出现多次记录的情况。
