@@ -291,3 +291,108 @@ $prefix[i]-prefix[j -1 ]=k, j<=i$
 
 首先排序，最外面两层依然暴力循环，内部两层使用双指针优化。
 去重的思路就是在每一层都取一个在这次循环中没有取过的数字。
+
+## PART4 数与位相关
+
+### 9.回文数
+
+[链接](https://leetcode.cn/problems/palindrome-number)
+
+> 注意将在`int`范围内的数字反转后可能超出`int`范围。
+
+### 231.2的幂
+
+[链接](https://leetcode.cn/problems/power-of-two/)
+
+$$
+n>0，
+n\&(n-1)=0
+$$
+
+$$n>0,n\&(-n)=n$$
+
+### 172.阶乘后的零
+
+[链接](https://leetcode.cn/problems/factorial-trailing-zeroes)
+
+将任意数字可以表示为一系列素数的乘积
+
+$num=2^a*3^b*5^c*...$
+而只有$2*5$素数相乘才能得到$10$，也就是结尾零，因此将任务转化为$n,(n-1),...,1$中能拆分出的$\min(2_{num},5_{num})$，而可知$2_{num}>5_{num}$，因此任务就变成了找$5_{num}$
+
+$$5_{num}=\dfrac n {5}+\dfrac n {25}+ ...$$
+
+### 476.数字的补数
+
+[链接](https://leetcode.cn/problems/number-complement/)
+
+> 要注意当数字为$2^{31}$时，大于它的$2^{power}$为$2^{32}$，超出了`int`的范围，使用`unsigned int`
+
+### 319.灯泡开关
+
+[链接](https://leetcode.cn/problems/bulb-switcher)
+
+任何正整数$n$都可以拆解为$p*q$，那么一个灯泡就会在$p$和$q$两次动开关，抵消效果，除非$p=q$，也就是$n$是一个平方数，因此关键就是找平方数。
+
+### 670.最大交换
+
+[链接](https://leetcode.cn/problems/maximum-swap)
+
+#### 1.贪心
+每一位数字应该不小于所有排它后面的数字，否则找最大的且排最后面的数字与之交换
+
+
+### 507.完美数
+
+[链接](https://leetcode.cn/problems/perfect-number)
+
+利用`sqrt`优化，同时考虑到`1`情况特殊，$1=1\times 1$
+
+
+### 372.超级次方
+
+[链接](https://leetcode.cn/problems/super-pow/)
+
+
+#### 1.利用快速幂暴力做
+
+#### 2.循环取余
+
+~~来自高中的灵感~~,根据抽屉原理,$a^n$对$k$取余,当$n$的取值种类大于$k$时,一定会出现重复,这时就出现了循环。比如$a^p$和$a^q$对$k$同余，那么$a^{p+1}$和$a^{q+1}$对$k$也同余。
+
+### 136.只出现一次的数字
+
+[链接](https://leetcode.cn/problems/single-number/)
+
+异或的性质，$0\oplus n=n$，$n\oplus n=0$
+
+
+### 201.数字范围按位与
+
+[链接](https://leetcode.cn/problems/bitwise-and-of-numbers-range/)
+
+将$left$和$right$都用二进制表示:
+$left\,\;=a_{32}a_{31}...a_1$
+$right=b_{32}b_{31}...b_1$
+
+从高位向低位看,如果截至某一位$k$时$a_k\ne b_k$，那么在$[left，right]$范围内一定发生了一次==跳跃==：
+从$0111..1$跨越到了$1000..0$，所以范围内的数字按位与在该位及之后都是$0$。
+
+因此目标就转化为找到$left$和$right$不一样的最高位。
+
+
+#### 1.从高位开始往下走
+
+#### 2.Barin Kernignhan算法
+
+
+每次对 $number$和$number−1$之间进行按位与运算后，$number$中最右边的$1$会被抹去变成$0$
+
+```python
+class Solution:
+    def rangeBitwiseAnd(self, m: int, n: int) -> int:
+        while m < n:
+            # 抹去最右边的 1
+            n = n & (n - 1)
+        return n
+```
