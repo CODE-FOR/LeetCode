@@ -396,3 +396,30 @@ class Solution:
             n = n & (n - 1)
         return n
 ```
+
+## PART5 栈与递归相关
+
+### 682.棒球比赛
+
+[链接](https://leetcode.cn/problems/baseball-game/)
+
+无难度，注意负数的位移操作。
+
+### 71.简化路径
+
+[链接](https://leetcode.cn/problems/simplify-path)
+
+无难度，注意细节，例如最后的路径结尾可能没有`\`，要记得处理。
+
+### 150.逆波兰表达式
+
+[链接](https://leetcode.cn/problems/evaluate-reverse-polish-notation)
+
+记得逆波兰表达式如何运算即可，逆波兰表达式就是AST（数字是叶结点，运算符是非叶子结点，且有两个子结点）经过后序遍历得到的。
+后序遍历的特点就是一个节点的子节点在其之前，找到第一个运算符，前两个一定是其子节点（叶子结点），就可以把这个运算符转化为数字（叶子节点），不断进行就可以得到最终一个数字（叶子节点）。
+
+### 20.有效的括号
+
+[链接](https://leetcode.cn/problems/valid-parentheses)
+
+注意细节，只有']'，或者'(()'这种。
