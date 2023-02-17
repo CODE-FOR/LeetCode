@@ -423,3 +423,24 @@ class Solution:
 [链接](https://leetcode.cn/problems/valid-parentheses)
 
 注意细节，只有']'，或者'(()'这种。
+
+### 636.函数的独占时间
+
+[链接](https://leetcode.cn/problems/exclusive-time-of-functions/)
+
+模拟题：
+- 当遇到start时
+    - 若存在正在执行的进程，终止该进程，同时记录该进程的执行时长
+    - 加入新进程的记录
+- 当遇到end时
+    - 终止当前执行的进程，记录执行时长
+    - 若依然存在进程，恢复该进程的执行（重新改写开始时间）
+
+
+### 341.扁平化嵌套列表迭代器
+
+[链接](https://leetcode.cn/problems/flatten-nested-list-iterator)
+
+递归做即可
+
+
