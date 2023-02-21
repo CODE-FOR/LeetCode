@@ -444,3 +444,15 @@ class Solution:
 递归做即可
 
 
+### 232.用栈实现队列
+
+[链接](https://leetcode.cn/problems/implement-queue-using-stacks)
+
+
+用两个栈去做即可，栈是后进先出，两次后进后出即位先进先出。
+
+### 155.最小栈
+
+[链接](https://leetcode.cn/problems/min-stack/submissions/)
+
+可以在每个元素入栈时把当前栈的最小值存储起来
