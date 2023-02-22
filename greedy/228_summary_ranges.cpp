@@ -12,7 +12,7 @@ public:
         if (nums.empty()) {
             return ranges;
         }
-        // 为了更好的判断结尾部分。
+        // 为了更好的判断结尾部分，dummy_end。
         nums.push_back(nums.back());
         int last_num = nums[0];
         int continuous_length = 0;
