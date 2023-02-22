@@ -506,3 +506,9 @@ class Solution:
 [链接](https://leetcode.cn/problems/summary-ranges)
 
 加一个`dummy_end`会方便解题目，注意离谱的边界。
+
+### 57.插入区间
+
+[链接](https://leetcode.cn/problems/insert-interval)
+
+简单题，模拟即可，判断交集
