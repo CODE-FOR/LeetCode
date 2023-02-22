@@ -491,3 +491,17 @@ class Solution:
 [链接](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii)
 
 核心的思想，就是把股票价格的变化想象成一张折线图，有上升，有下降，只要把所有的上升提取出来并吃满就将取得最大的收益。
+
+
+### 561.数组拆分
+
+[链接](https://leetcode.cn/problems/array-partition/)
+
+目标是尽可能让大的保留下来，先排序，顺序结对。
+证明稍微复杂一点，需要考虑每个保留的元素的角标大小（排序）。
+
+
+### 228.汇总区间
+
+[链接](https://leetcode.cn/problems/summary-ranges)
+
