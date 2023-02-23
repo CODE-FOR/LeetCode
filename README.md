@@ -87,6 +87,13 @@ $$
 $$
 
 
+
+### 343.整数拆分
+
+[链接](https://leetcode.cn/problems/integer-break/)
+
+常规动态规划方法
+
 ## PART2 数据结构
 
 ### 203.移除链表元素
@@ -548,3 +555,4 @@ class Solution:
 [链接](https://leetcode.cn/problems/gas-station)
 
 从失败的起点途径的所有结点都不能作为成功的起点，因此可以简化为一次遍历，同时借此可以证明只要$\sum{gas}>=\sum{cost}$就一定存在解。
+
