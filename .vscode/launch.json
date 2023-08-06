@@ -20,7 +20,7 @@
           }
         ],
         "preLaunchTask": "g++ build active file",
-        "miDebuggerPath": "/usr/bin/gdb"
+        "miDebuggerPath": "D:\\MingW\\mingw64\\bin\\gdb"
       }
     ]
   }
