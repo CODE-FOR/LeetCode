@@ -567,3 +567,66 @@ class Solution:
 可以用单调栈来维护这个可能的边界列表，在加入新的边界（新的边界一定入栈，因为一定满足了更近的要求）要让又远又高的边界出栈。
 这个栈理所应当可以算左侧的面积，但是利用出栈的操作也可以算右侧的面积。
 当某个位置需要出栈时，说明首次出现了小于该高度的边界，这样就找到了最右边界。
+
+## PART7 双指针相关
+
+### 680.验证回文字符串II
+
+[链接](https://leetcode-cn.com/problems/valid-palindrome-ii/)
+
+比较简单，由于只能删除一个字符，因此从左右两端比较，遇到不相同的字符尝试删除左边或者右边的字符，再判断剩下的字符串是否是回文串。
+
+### 345.反转字符串中的元音字母
+
+[链接](https://leetcode-cn.com/problems/reverse-vowels-of-a-string/)
+
+双指针，从两端向中间遍历，遇到元音字母就交换。
+
+### 209.长度最小的子数组
+
+[链接](https://leetcode-cn.com/problems/minimum-size-subarray-sum/)
+
+使用滑动窗口即可，注意细节。
+
+### 611.有效三角形的个数
+
+[链接](https://leetcode-cn.com/problems/valid-triangle-number/)
+
+使用双指针，先排序，确定最长边，然后使用双指针法确定另外两条边。
+
+### 674.最长连续递增序列
+
+[链接](https://leetcode-cn.com/problems/longest-continuous-increasing-subsequence/)
+
+使用滑动窗口即可。
+
+### 3.无重复字符的最长子串
+
+[链接](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
+
+使用滑动窗口即可。
+
+### 88.合并两个有序数组
+
+[链接](https://leetcode-cn.com/problems/merge-sorted-array/)
+
+倒叙合并，不用重新开辟空间。
+
+### 160.相交链表
+
+[链接](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
+
+双指针，两个指针分别从两个链表的头部开始遍历，当遍历到尾部时，指向另一个链表的头部继续遍历，这样两个指针走过的路程相同，必然会在交点相遇。
+
+### 141.环形链表
+
+[链接](https://leetcode-cn.com/problems/linked-list-cycle/)
+
+双指针，一个指针每次走一步，一个指针每次走两步，如果有环，两个指针必然会相遇。
+
+### 142.环形链表 II
+
+[链接](https://leetcode-cn.com/problems/linked-list-cycle-ii/)  
+
+双指针，一个指针每次走一步，一个指针每次走两步，如果有环，两个指针必然会相遇。
+此时 slow指针走了x+z=s步，fast指针走了x+ny+z=2s步，可以得到x+z=ny，即x+z是n的倍数，因此可以让slow指针从头开始走，fast指针从相遇点开始走，每次都走一步，那么当slow指针走了x步时，fast指针走了x+z步，即走了n倍的x+z，也就是n倍的ny，此时fast指针也走了x步，也就是说slow指针和fast指针在环的入口点相遇。
