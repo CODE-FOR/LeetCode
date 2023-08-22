@@ -14,24 +14,19 @@ struct TreeNode {
 class Solution {
 public:
     void flatten(TreeNode* root) {
-        TreeNode* dummy_head = new TreeNode();
-        TreeNode* head = dummy_head;
-        stack<TreeNode*> right_subtree_root_stack;
-        right_subtree_root_stack.push(root);
-        while (!right_subtree_root_stack.empty()) {
-            root = right_subtree_root_stack.top();
-            head->right = root;
-            right_subtree_root_stack.pop();
-            while (root) {
-                if (root->right) {
-                    right_subtree_root_stack.push(root->right);
+        TreeNode *curr = root;
+        while (curr != nullptr) {
+            if (curr->left != nullptr) {
+                auto next = curr->left;
+                auto predecessor = next;
+                while (predecessor->right != nullptr) {
+                    predecessor = predecessor->right;
                 }
-                head = root;
-                root->right = root->left;
-                root->left = nullptr;
-                root = root->right;
+                predecessor->right = curr->right;
+                curr->left = nullptr;
+                curr->right = next;
             }
+            curr = curr->right;
         }
-        root = dummy_head->left;
     }
 };
