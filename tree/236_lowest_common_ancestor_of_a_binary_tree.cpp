@@ -12,40 +12,18 @@ public:
         return res;
     }
 
-    void dfs(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if (find_p && find_q) {
-            return;
-        }
-
+    bool dfs(TreeNode* root, TreeNode* p, TreeNode* q) {
         if (!root) {
-            return;
-        }
-        
-        bool find_p_now = find_p, find_q_now = find_q;
-        dfs(root->left, p, q);
-        if (find_p && find_q) {
-            return;
-        }
-        bool find_p_after_left = find_p, find_q_after_left = find_q;
-        find_p = find_p_now, find_q = find_q_now;
-        dfs(root->right, p, q);
-        if (find_p && find_q) {
-            return;
-        }
-        find_p = find_p_after_left | find_p;
-        find_q = find_q_after_left | find_q;
-        if (root == p) {
-            find_p = true;
-        } else if (root == q) {
-            find_q = true;
-        }
-        if (find_p && find_q) {
+            return false;
+        } 
+        bool find_in_right_sub = dfs(root->right, p, q);
+        bool find_in_left_sub = dfs(root->left, p, q);
+        if ((find_in_left_sub && find_in_right_sub) || ((root == p || root == q) && (find_in_left_sub || find_in_right_sub))) {
             res = root;
         }
+        return find_in_left_sub | find_in_right_sub | root == p | root == q;
     }
 
 private:
-    bool find_p = false;
-    bool find_q = false;
     TreeNode* res = nullptr;
 };
